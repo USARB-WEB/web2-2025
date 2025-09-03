@@ -1,47 +1,40 @@
 import { Controller, Get, Post, Param, Put, Delete, Patch } from "@nestjs/common";
+import { PostsService } from "./posts.service";
 
 @Controller('posts')
 export class PostsController {
-    posts: any;
+    
+    constructor(private postsService: PostsService){
 
-    constructor() {
-        this.posts = [
-            { id: 1, title: 'First Post', content: 'This is the content of the first post.' },
-            { id: 2, title: 'Second Post', content: 'This is the content of the second post.' },
-            { id: 3, title: 'Third Post', content: 'This is the content of the third post.' },
-        ];
     }
-
+    
     @Get()
     getAllPosts() {
-        return this.posts;
+        return this.postsService.getAllPosts();
     }
 
     @Get(':id')
     getPostById(@Param('id') id: string) {
-        return this.posts.find(post => post.id === parseInt(id));
+        return this.postsService.getPostById(id)
     }
 
     @Post('')
     createPost() {
-        return this.posts.push({ id: this.posts.length + 1, title: 'New Post', content: 'This is a new post.' });
+        return this.postsService.createPost()
     }
 
     @Put(':id')
     updatePost(@Param('id') id: string) {
-        this.posts.splice(parseInt(id) - 1, 1, { id: parseInt(id), title: 'Updated Post', content: 'This post has been updated.' })
-        return this.posts.find(post => post.id === parseInt(id));
+        return this.postsService.updatePost(id)
     }
 
     @Patch(':id')
     partiallyUpdatePost(@Param('id') id: string) {
-        this.posts.splice(parseInt(id) - 1, 1, { id: parseInt(id), title: 'Updated Post', content: 'This post has been updated.' })
-        return this.posts.find(post => post.id === parseInt(id));
+        return this.postsService.partiallyUpdatePost(id)
     }
 
     @Delete(':id')
     deletePost(@Param('id') id: string) {
-        this.posts.splice(this.posts.findIndex(post => post.id === parseInt(id)), 1);
-        return {};
+        return this.postsService.deletePost(id);
     }
 }
