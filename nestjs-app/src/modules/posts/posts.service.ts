@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { CreatePostDto } from "./dto/create-post.dto";
 
 @Injectable()
 export class PostsService {
@@ -23,8 +24,12 @@ export class PostsService {
         return this.posts.find(post => post.id === parseInt(id));
     }
 
-    createPost() {
-        return this.posts.push({ id: this.posts.length + 1, title: 'New Post', content: 'This is a new post.' });
+    createPost(createPostDto: CreatePostDto) {
+        return this.posts.push({ 
+            id: this.posts.length + 1, 
+            title: createPostDto.title, 
+            content: createPostDto.content
+        });
     }
 
     updatePost(id: string) {
