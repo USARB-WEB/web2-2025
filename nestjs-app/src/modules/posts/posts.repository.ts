@@ -1,13 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { CreatePostDto } from "./dto/create-post.dto";
+import { Post } from "./post.entity";
+import { UpdatePostDto } from "./dto/update-post.dto";
 
 @Injectable()
 export class PostsRepository {
-    private posts: CreatePostDto[] = [
-        { id: 1, title: 'First Post', content: 'This is the content of the first post.' },
-        { id: 2, title: 'Second Post', content: 'This is the content of the second post.' },
-        { id: 3, title: 'Third Post', content: 'This is the content of the third post.' },
-    ];
+    private posts: Post[];
+
+    constructor() {
+        this.initializePosts();
+    }
+
+    private initializePosts() {
+        this.posts = [
+            { id: 1, title: 'First Post', content: 'This is the content of the first post.' },
+            { id: 2, title: 'Second Post', content: 'This is the content of the second post.' }
+        ];
+    }
 
     getAllPosts() {
         return this.posts;
@@ -26,12 +35,13 @@ export class PostsRepository {
         this.posts.push(newPost);
         return newPost;
     }
-    updatePost(id: string, updatePostDto: CreatePostDto) {
+    updatePost(id: string, updatePostDto: UpdatePostDto) {
         const postIndex = this.posts.findIndex(post => post.id === parseInt(id));
         if (postIndex === -1) {
             return null;
         }
-        this.posts[postIndex] = updatePostDto;
+        const updatedPost = { ...this.posts[postIndex], ...updatePostDto };
+        this.posts[postIndex] = updatedPost;
         return this.posts[postIndex];
     }
     deletePost(id: string) {

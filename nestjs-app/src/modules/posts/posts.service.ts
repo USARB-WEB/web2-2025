@@ -42,4 +42,13 @@ export class PostsService {
         this.getPostById(id);
         return this.postsRepository.deletePost(id);
     }
+
+    updatePostTitle(id: string, title: string) {
+        const post = this.getPostById(id);
+        if (!post) {
+            throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
+        }
+        post.title = title;
+        return this.postsRepository.updatePost(id, post);
+    }
 }
