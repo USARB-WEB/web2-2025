@@ -31,5 +31,17 @@ Git tutorials:
 - Express https://expressjs.com/
 - NestJS https://nestjs.com/
 
+
+# Tutorials
+## Docker 
+- https://www.youtube.com/watch?v=b0HMimUb4f0
+- https://www.youtube.com/watch?v=RqTEHSBrYFw
+
+# Database ORM(for NestJS)
+- https://docs.nestjs.com/techniques/database
+- https://docs.nestjs.com/recipes/prisma#set-up-prisma
+- https://typeorm.io/docs/getting-started
+- https://www.prisma.io/docs/getting-started
+
 # ToR example
 https://docs.google.com/document/d/1L2TvUOG2BJsF3T_ItDeyuAzyIzYoRAXV/edit?usp=sharing&ouid=112800070006295859369&rtpof=true&sd=true
