@@ -25,13 +25,13 @@ export class PostsController {
     }
 
     @Put(':id')
-    updatePost(@Param('id') id: string) {
-        return this.postsService.updatePost(id)
+    updatePost(@Param('id') id: string, @Body() createPostDto: CreatePostDto) {
+        return this.postsService.updatePost(id, createPostDto);
     }
 
     @Patch(':id')
-    partiallyUpdatePost(@Param('id') id: string) {
-        return this.postsService.partiallyUpdatePost(id)
+    partiallyUpdatePost(@Param('id') id: string, @Body() updatePostDto: CreatePostDto) {
+        return this.postsService.partiallyUpdatePost(id, updatePostDto);
     }
 
     @Delete(':id')
