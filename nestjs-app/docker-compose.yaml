@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16
+    container_name: web2-db
+    restart: unless-stopped
+    ports:
+      - 1111:5432
+    environment:
+        POSTGRES_USER: web2user
+        POSTGRES_PASSWORD: web2password
+        POSTGRES_DB: web2db
+    networks:
+      - web2-network
+
+  pg-admin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: unless-stopped
+    ports:
+      - 8888:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@domain.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    networks:
+      - web2-network
+    depends_on:
+      - db
+
+networks:
+  web2-network:
+    driver: bridge
