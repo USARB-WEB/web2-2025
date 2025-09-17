@@ -2,6 +2,7 @@ services:
   db:
     image: postgres:16
     container_name: web2-db
+    hostname: app-db
     restart: unless-stopped
     ports:
       - 1111:5432
@@ -25,6 +26,26 @@ services:
       - web2-network
     depends_on:
       - db
+
+  web2-app:
+    image: web2-app:v1.0.1
+    container_name: web2-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 1234:3210
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: web2user
+      DATABASE_PASSWORD: web2password
+      DATABASE_NAME: web2db
+    depends_on:
+      - db
+    networks:
+      - web2-network
 
 networks:
   web2-network:
