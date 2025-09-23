@@ -14,8 +14,8 @@ export class StudentsService {
 
   }
 
-  create(createStudentDto: CreateStudentDto) {
-    return 'This action adds a new student';
+  async create(createStudentDto: CreateStudentDto) {
+    return await this.studentsRepository.save(createStudentDto);
   }
 
   async findAll(): Promise<Student[]> {
