@@ -5,6 +5,8 @@ import { PostsModule } from './modules/posts/posts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StudentsModule } from './modules/students/students.module';
+import { StudyGroupsModule } from './modules/study_groups/study_groups.module';
+import { FacultiesModule } from './modules/faculties/faculties.module';
 
 @Module({
   imports: [
@@ -20,11 +22,15 @@ import { StudentsModule } from './modules/students/students.module';
         password: config.get<string>('POSTGRES_PASSWORD'),
         database: config.get<string>('POSTGRES_DB'),
         autoLoadEntities: true,
-        synchronize: true, // ⚠️ dev only
+        synchronize: false, // ⚠️ dev only
+        migrations: ['dist/migrations/*.js'],
+        migrationsRun: true,
       }),
     }),
     PostsModule,
-    StudentsModule
+    StudentsModule,
+    StudyGroupsModule,
+    FacultiesModule
   ],
 
   controllers: [AppController],
