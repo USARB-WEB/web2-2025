@@ -24,8 +24,8 @@ import { TestMigrationGenerateModule } from './modules/test_migration_generate/t
         database: config.get<string>('POSTGRES_DB'),
         autoLoadEntities: true,
         synchronize: false, // ⚠️ dev only
-        migrations: ['dist/migrations/*.js'],
-        migrationsRun: true,
+        // migrations: ['dist/migrations/*.js'],
+        // migrationsRun: true,
       }),
     }),
     PostsModule,
