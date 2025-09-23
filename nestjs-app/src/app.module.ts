@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StudentsModule } from './modules/students/students.module';
 import { StudyGroupsModule } from './modules/study_groups/study_groups.module';
 import { FacultiesModule } from './modules/faculties/faculties.module';
+import { TestMigrationGenerateModule } from './modules/test_migration_generate/test_migration_generate.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { FacultiesModule } from './modules/faculties/faculties.module';
     PostsModule,
     StudentsModule,
     StudyGroupsModule,
-    FacultiesModule
+    FacultiesModule,
+    TestMigrationGenerateModule
   ],
 
   controllers: [AppController],
