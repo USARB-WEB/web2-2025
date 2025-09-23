@@ -7,4 +7,7 @@ export class StudyGroup {
 
   @Column()
   name: string;
+
+  @Column()
+  code: string;
 }
