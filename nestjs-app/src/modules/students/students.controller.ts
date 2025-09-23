@@ -24,12 +24,15 @@ export class StudentsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto) {
-    return this.studentsService.update(+id, updateStudentDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateStudentDto: UpdateStudentDto,
+  ): Promise<Student> {
+    return await this.studentsService.update(+id, updateStudentDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.studentsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.studentsService.remove(+id);
   }
 }

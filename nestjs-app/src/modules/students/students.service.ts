@@ -32,11 +32,24 @@ export class StudentsService {
     return student;
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student`;
+  async update(
+    id: number,
+    updateStudentDto: UpdateStudentDto,
+  ): Promise<Student> {
+    const student = await this.studentsRepository.findOne({ where: { id } });
+
+    if (!student) {
+      throw new NotFoundException(`Student with ID ${id} not found`);
+    }
+    return await this.studentsRepository.save({ ...updateStudentDto, id });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} student`;
+  async remove(id: number) {
+    const student = await this.studentsRepository.findOne({ where: { id } });
+
+    if (!student) {
+      throw new NotFoundException(`Student with ID ${id} not found`);
+    }
+    return await this.studentsRepository.delete(id);
   }
 }
