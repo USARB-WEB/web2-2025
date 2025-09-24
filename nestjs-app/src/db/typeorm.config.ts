@@ -13,6 +13,7 @@ export default new DataSource({
   database: process.env.POSTGRES_DB,
   synchronize: false, // ⚠️ dev only
   entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/db/migrations/*.js'],
-  migrationsRun: true,
+  migrations: ['src/db/migrations/*.ts'],
+  migrationsRun: false,
+  logging: true,
 });
